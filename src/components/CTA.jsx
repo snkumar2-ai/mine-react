@@ -185,16 +185,8 @@ export default function CTA() {
               className="bg-gradient-to-r from-soft-pink via-warm-pastel to-soft-teal p-12 rounded-3xl shadow-2xl border-4 border-white"
               initial={{ scale: 0.5, rotate: -10 }}
               animate={{ 
-                scale: [0.5, 1.2, 1],
-                rotate: [0, 5, -5, 0]
-              }}
-              transition={{ 
-                duration: 1.5,
-                type: "spring",
-                bounce: 0.5
-              }}
-              onClick={(e) => e.stopPropagation()}
-              animate={{
+                scale: 1,
+                rotate: 0,
                 boxShadow: [
                   "0 0 20px rgba(255, 196, 196, 0.5)",
                   "0 0 40px rgba(255, 214, 165, 0.8)",
@@ -203,11 +195,12 @@ export default function CTA() {
                   "0 0 20px rgba(255, 196, 196, 0.5)"
                 ]
               }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "reverse"
+              transition={{ 
+                scale: { duration: 0.8, type: "spring", bounce: 0.5 },
+                rotate: { duration: 0.8 },
+                boxShadow: { duration: 2, repeat: Infinity, repeatType: "reverse" }
               }}
+              onClick={(e) => e.stopPropagation()}
             >
               <motion.p
                 className="font-playfair text-5xl md:text-7xl text-white font-bold"
