@@ -91,7 +91,7 @@ export default function CTA() {
 
         {showWedding && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -175,22 +175,25 @@ export default function CTA() {
 
         {showMessage && (
           <motion.div
-            className="mt-12 text-center"
-            initial={{ opacity: 0, scale: 0.5, y: 50 }}
-            animate={{ 
-              opacity: 1, 
-              scale: [0.5, 1.2, 1],
-              y: 0,
-              rotate: [0, 5, -5, 0]
-            }}
-            transition={{ 
-              duration: 1.5,
-              type: "spring",
-              bounce: 0.5
-            }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            onClick={() => setShowMessage(false)}
           >
             <motion.div
-              className="bg-gradient-to-r from-soft-pink via-warm-pastel to-soft-teal p-8 rounded-3xl shadow-2xl border-4 border-white"
+              className="bg-gradient-to-r from-soft-pink via-warm-pastel to-soft-teal p-12 rounded-3xl shadow-2xl border-4 border-white"
+              initial={{ scale: 0.5, rotate: -10 }}
+              animate={{ 
+                scale: [0.5, 1.2, 1],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{ 
+                duration: 1.5,
+                type: "spring",
+                bounce: 0.5
+              }}
+              onClick={(e) => e.stopPropagation()}
               animate={{
                 boxShadow: [
                   "0 0 20px rgba(255, 196, 196, 0.5)",
@@ -207,7 +210,7 @@ export default function CTA() {
               }}
             >
               <motion.p
-                className="font-playfair text-4xl md:text-6xl text-white font-bold"
+                className="font-playfair text-5xl md:text-7xl text-white font-bold"
                 animate={{
                   scale: [1, 1.1, 1]
                 }}
@@ -219,6 +222,14 @@ export default function CTA() {
               >
                 📞 You Know The Number 💕
               </motion.p>
+              
+              <motion.button
+                onClick={() => setShowMessage(false)}
+                className="mt-8 bg-white text-deep-purple px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all"
+                whileHover={{ scale: 1.1 }}
+              >
+                Close
+              </motion.button>
             </motion.div>
           </motion.div>
         )}
