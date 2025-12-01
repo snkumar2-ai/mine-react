@@ -5,6 +5,7 @@ export default function CTA() {
   const [showMessage, setShowMessage] = useState(false)
   const [showWedding, setShowWedding] = useState(false)
   const [windowHeight, setWindowHeight] = useState(800)
+  const [clickCount, setClickCount] = useState(0)
 
   useEffect(() => {
     setWindowHeight(window.innerHeight)
@@ -19,7 +20,7 @@ export default function CTA() {
       {[...Array(10)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute text-4xl"
+          className="absolute text-4xl pointer-events-none"
           style={{
             left: `${(i * 10) % 100}%`,
             top: `${(i * 15) % 100}%`,
@@ -63,18 +64,21 @@ export default function CTA() {
           viewport={{ once: true }}
         >
           <button
-            onClick={() => {
-              alert('Wedding animation!')
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setClickCount(prev => prev + 1)
               setShowWedding(true)
             }}
             className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
           >
-            A New Beginning?
+            A New Beginning? {clickCount > 0 && `(${clickCount})`}
           </button>
           
           <button
-            onClick={() => {
-              alert('Message appearing!')
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
               setShowMessage(true)
             }}
             className="bg-gradient-to-r from-soft-teal to-deep-purple text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
@@ -82,6 +86,8 @@ export default function CTA() {
             If You Want to Talk...
           </button>
         </motion.div>
+
+        <p className="text-white mt-4">Debug: showWedding={showWedding.toString()}, showMessage={showMessage.toString()}</p>
 
         {showWedding && (
           <motion.div
