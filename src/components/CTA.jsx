@@ -38,7 +38,7 @@ export default function CTA() {
         </motion.div>
       ))}
 
-      <div className="text-center z-20 px-8 max-w-4xl">
+      <div className="text-center z-30 px-8 max-w-4xl relative">
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 50 }}
@@ -56,35 +56,31 @@ export default function CTA() {
         </motion.div>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-8 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-8 justify-center items-center relative z-40"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <motion.button
-            onClick={() => setShowWedding(true)}
-            className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px]"
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 20px 40px rgba(255, 196, 196, 0.5)"
+          <button
+            onClick={() => {
+              alert('Wedding animation!')
+              setShowWedding(true)
             }}
-            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
           >
             A New Beginning?
-          </motion.button>
+          </button>
           
-          <motion.button
-            onClick={() => setShowMessage(true)}
-            className="bg-gradient-to-r from-soft-teal to-deep-purple text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px]"
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 20px 40px rgba(160, 231, 229, 0.5)"
+          <button
+            onClick={() => {
+              alert('Message appearing!')
+              setShowMessage(true)
             }}
-            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-soft-teal to-deep-purple text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
           >
             If You Want to Talk...
-          </motion.button>
+          </button>
         </motion.div>
 
         {showWedding && (
