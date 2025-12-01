@@ -94,131 +94,35 @@ export default function CTA() {
         <p className="text-white mt-4">Debug: showProposal={showProposal.toString()}, showMessage={showMessage.toString()}</p>
         
         {showProposal && (
-          <motion.div
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <motion.div className="text-center relative">
-              {/* Ring Box Opening */}
-              <motion.div
-                className="text-8xl mb-8"
-                initial={{ rotateX: 0 }}
-                animate={{ rotateX: [0, -90, 0] }}
-                transition={{ duration: 2, delay: 0.5 }}
-              >
-                💍
-              </motion.div>
-              
-              <motion.h2
-                className="font-playfair text-4xl md:text-6xl text-white mb-6"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
-              >
-                Soumya, Will You Marry Me?
-              </motion.h2>
-              
-              <motion.p
-                className="font-lato text-xl text-soft-pink mb-8 max-w-2xl mx-auto"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 }}
-              >
-                💕 You are my everything, my forever, my always 💕
-              </motion.p>
-
-              {/* Sparkles */}
-              {[...Array(20)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute text-3xl"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`
-                  }}
-                  animate={{
-                    scale: [0, 1, 0],
-                    rotate: [0, 180, 360],
-                    opacity: [0, 1, 0]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: Math.random() * 2
-                  }}
-                >
-                  ✨
-                </motion.div>
-              ))}
-
-              <motion.button
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80">
+            <div className="bg-white p-8 rounded-lg text-center max-w-md">
+              <div className="text-6xl mb-4">💍</div>
+              <h2 className="text-2xl font-bold mb-4">Soumya, Will You Marry Me?</h2>
+              <p className="mb-6">💕 You are my everything, my forever, my always 💕</p>
+              <button
                 onClick={() => setShowProposal(false)}
-                className="mt-8 bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all"
-                whileHover={{ scale: 1.1 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2 }}
+                className="bg-pink-500 text-white px-6 py-2 rounded"
               >
                 💕 Yes, Forever! 💕
-              </motion.button>
-            </motion.div>
-          </motion.div>
+              </button>
+            </div>
+          </div>
         )}
 
         {showMessage && (
-          <motion.div
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            onClick={() => setShowMessage(false)}
-          >
-            <motion.div
-              className="bg-gradient-to-r from-soft-pink via-warm-pastel to-soft-teal p-12 rounded-3xl shadow-2xl border-4 border-white"
-              initial={{ scale: 0.5, rotate: -10 }}
-              animate={{ 
-                scale: 1,
-                rotate: 0,
-                boxShadow: [
-                  "0 0 20px rgba(255, 196, 196, 0.5)",
-                  "0 0 40px rgba(255, 214, 165, 0.8)",
-                  "0 0 60px rgba(160, 231, 229, 0.8)",
-                  "0 0 40px rgba(255, 214, 165, 0.8)",
-                  "0 0 20px rgba(255, 196, 196, 0.5)"
-                ]
-              }}
-              transition={{ 
-                scale: { duration: 0.8, type: "spring", bounce: 0.5 },
-                rotate: { duration: 0.8 },
-                boxShadow: { duration: 2, repeat: Infinity, repeatType: "reverse" }
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <motion.p
-                className="font-playfair text-5xl md:text-7xl text-white font-bold"
-                animate={{
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-              >
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50" onClick={() => setShowMessage(false)}>
+            <div className="bg-gradient-to-r from-pink-400 to-purple-500 p-8 rounded-lg text-center" onClick={(e) => e.stopPropagation()}>
+              <p className="text-4xl text-white font-bold mb-4">
                 😎 You Know What To Do 💕
-              </motion.p>
-              
-              <motion.button
+              </p>
+              <button
                 onClick={() => setShowMessage(false)}
-                className="mt-8 bg-white text-deep-purple px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all"
-                whileHover={{ scale: 1.1 }}
+                className="bg-white text-purple-600 px-6 py-2 rounded"
               >
                 Close
-              </motion.button>
-            </motion.div>
-          </motion.div>
+              </button>
+            </div>
+          </div>
         )}
 
         <motion.p
