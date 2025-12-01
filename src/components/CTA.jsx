@@ -65,10 +65,12 @@ export default function CTA() {
         >
           <button
             onClick={(e) => {
+              console.log('Proposal button clicked!')
               e.preventDefault()
               e.stopPropagation()
               setClickCount(prev => prev + 1)
               setShowProposal(true)
+              console.log('showProposal set to true')
             }}
             className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
           >
@@ -77,9 +79,11 @@ export default function CTA() {
           
           <button
             onClick={(e) => {
+              console.log('Message button clicked!')
               e.preventDefault()
               e.stopPropagation()
               setShowMessage(true)
+              console.log('showMessage set to true')
             }}
             className="bg-gradient-to-r from-soft-teal to-deep-purple text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
           >
@@ -87,6 +91,8 @@ export default function CTA() {
           </button>
         </motion.div>
 
+        <p className="text-white mt-4">Debug: showProposal={showProposal.toString()}, showMessage={showMessage.toString()}</p>
+        
         {showProposal && (
           <motion.div
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
