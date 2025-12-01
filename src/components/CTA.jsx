@@ -47,7 +47,7 @@ export default function CTA() {
           viewport={{ once: true }}
         >
           <h2 className="font-playfair text-5xl md:text-7xl text-deep-purple mb-8 text-glow">
-            The Gentle Ask
+            The Gentle Ask v2024
           </h2>
           
           <p className="font-lato text-2xl text-deep-blue leading-relaxed mb-12 italic">
