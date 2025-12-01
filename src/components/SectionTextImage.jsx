@@ -8,24 +8,37 @@ export default function SectionTextImage({ id, title, content, voiceOver, imageU
   const playVoiceOver = () => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel()
-      const utterance = new SpeechSynthesisUtterance(voiceOver)
-      utterance.rate = 0.9
-      utterance.pitch = 0.9
-      utterance.volume = 1
       
-      const voices = window.speechSynthesis.getVoices()
-      const maleVoice = voices.find(voice => 
-        voice.name.includes('Male') || 
-        voice.name.includes('David') || 
-        voice.name.includes('Google US English')
-      )
-      if (maleVoice) utterance.voice = maleVoice
+      const speak = () => {
+        const utterance = new SpeechSynthesisUtterance(voiceOver)
+        utterance.rate = 0.8
+        utterance.pitch = 0.8
+        utterance.volume = 1
+        
+        const voices = window.speechSynthesis.getVoices()
+        const maleVoice = voices.find(voice => 
+          voice.lang.includes('en') && (
+            voice.name.toLowerCase().includes('male') || 
+            voice.name.includes('David') || 
+            voice.name.includes('Google UK English Male')
+          )
+        ) || voices.find(voice => voice.lang.includes('en'))
+        
+        if (maleVoice) utterance.voice = maleVoice
+        
+        utterance.onstart = () => setIsPlaying(true)
+        utterance.onend = () => setIsPlaying(false)
+        utterance.onerror = () => setIsPlaying(false)
+        
+        window.speechSynthesis.speak(utterance)
+        setShowVoiceOver(true)
+      }
       
-      utterance.onstart = () => setIsPlaying(true)
-      utterance.onend = () => setIsPlaying(false)
-      
-      window.speechSynthesis.speak(utterance)
-      setShowVoiceOver(true)
+      if (window.speechSynthesis.getVoices().length > 0) {
+        speak()
+      } else {
+        window.speechSynthesis.onvoiceschanged = () => speak()
+      }
     }
   }
 
