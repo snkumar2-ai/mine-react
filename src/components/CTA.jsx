@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
 export default function CTA() {
-  const [showMessage, setShowMessage] = useState(false)
   const [showProposal, setShowProposal] = useState(false)
   const [windowHeight, setWindowHeight] = useState(800)
   const [clickCount, setClickCount] = useState(0)
@@ -64,34 +63,17 @@ export default function CTA() {
           viewport={{ once: true }}
         >
           <button
-            onClick={(e) => {
-              console.log('Proposal button clicked!')
-              e.preventDefault()
-              e.stopPropagation()
-              setClickCount(prev => prev + 1)
+            onClick={() => {
+              alert('Proposal clicked!')
               setShowProposal(true)
-              console.log('showProposal set to true')
             }}
-            className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
+            style={{ background: 'pink', padding: '10px', margin: '10px' }}
           >
-            A New Beginning? {clickCount > 0 && `(${clickCount})`}
-          </button>
-          
-          <button
-            onClick={(e) => {
-              console.log('Message button clicked!')
-              e.preventDefault()
-              e.stopPropagation()
-              setShowMessage(true)
-              console.log('showMessage set to true')
-            }}
-            className="bg-gradient-to-r from-soft-teal to-deep-purple text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
-          >
-            If You Want to Talk...
+            A New Beginning?
           </button>
         </motion.div>
 
-        <p className="text-white mt-4">Debug: showProposal={showProposal.toString()}, showMessage={showMessage.toString()}</p>
+        <p className="text-white mt-4">Debug: showProposal={showProposal.toString()}</p>
         
         {showProposal && (
           <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80">
@@ -109,21 +91,7 @@ export default function CTA() {
           </div>
         )}
 
-        {showMessage && (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50" onClick={() => setShowMessage(false)}>
-            <div className="bg-gradient-to-r from-pink-400 to-purple-500 p-8 rounded-lg text-center" onClick={(e) => e.stopPropagation()}>
-              <p className="text-4xl text-white font-bold mb-4">
-                😎 You Know What To Do 💕
-              </p>
-              <button
-                onClick={() => setShowMessage(false)}
-                className="bg-white text-purple-600 px-6 py-2 rounded"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
+
 
         <motion.p
           className="mt-12 text-deep-blue/60 font-lato text-sm italic"
