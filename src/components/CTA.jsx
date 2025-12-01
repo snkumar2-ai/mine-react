@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 export default function CTA() {
   const [showMessage, setShowMessage] = useState(false)
-  const [showWedding, setShowWedding] = useState(false)
+  const [showProposal, setShowProposal] = useState(false)
   const [windowHeight, setWindowHeight] = useState(800)
   const [clickCount, setClickCount] = useState(0)
 
@@ -68,7 +68,7 @@ export default function CTA() {
               e.preventDefault()
               e.stopPropagation()
               setClickCount(prev => prev + 1)
-              setShowWedding(true)
+              setShowProposal(true)
             }}
             className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50 hover:scale-105"
           >
@@ -87,88 +87,76 @@ export default function CTA() {
           </button>
         </motion.div>
 
-        <p className="text-white mt-4">Debug: showWedding={showWedding.toString()}, showMessage={showMessage.toString()}</p>
-
-        {showWedding && (
+        {showProposal && (
           <motion.div
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <motion.div
-              className="relative"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 1, type: "spring" }}
-            >
-              {/* Wedding Rings */}
-              <motion.div className="text-center">
+            <motion.div className="text-center relative">
+              {/* Ring Box Opening */}
+              <motion.div
+                className="text-8xl mb-8"
+                initial={{ rotateX: 0 }}
+                animate={{ rotateX: [0, -90, 0] }}
+                transition={{ duration: 2, delay: 0.5 }}
+              >
+                💍
+              </motion.div>
+              
+              <motion.h2
+                className="font-playfair text-4xl md:text-6xl text-white mb-6"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+              >
+                Soumya, Will You Marry Me?
+              </motion.h2>
+              
+              <motion.p
+                className="font-lato text-xl text-soft-pink mb-8 max-w-2xl mx-auto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5 }}
+              >
+                💕 You are my everything, my forever, my always 💕
+              </motion.p>
+
+              {/* Sparkles */}
+              {[...Array(20)].map((_, i) => (
                 <motion.div
-                  className="text-9xl mb-8"
+                  key={i}
+                  className="absolute text-3xl"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`
+                  }}
                   animate={{
-                    rotate: [0, 360],
-                    scale: [1, 1.2, 1]
+                    scale: [0, 1, 0],
+                    rotate: [0, 180, 360],
+                    opacity: [0, 1, 0]
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 2,
                     repeat: Infinity,
-                    ease: "linear"
+                    delay: Math.random() * 2
                   }}
                 >
-                  💍
+                  ✨
                 </motion.div>
-                
-                <motion.h2
-                  className="font-playfair text-5xl md:text-7xl text-white mb-6"
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  Forever Starts Here
-                </motion.h2>
-                
-                <motion.p
-                  className="font-lato text-2xl text-soft-pink mb-8"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
-                >
-                  👰🤵 Together, Always 💕
-                </motion.p>
+              ))}
 
-                {/* Falling Hearts */}
-                {[...Array(30)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute text-4xl"
-                    style={{
-                      left: `${(i * 3.33) % 100}%`,
-                      top: `-10%`
-                    }}
-                    animate={{
-                      y: [0, windowHeight + 100],
-                      rotate: [0, 360],
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{
-                      duration: 3 + (i % 3),
-                      repeat: Infinity,
-                      delay: i * 0.1
-                    }}
-                  >
-                    {i % 3 === 0 ? '❤️' : i % 3 === 1 ? '💕' : '💖'}
-                  </motion.div>
-                ))}
-
-                <motion.button
-                  onClick={() => setShowWedding(false)}
-                  className="mt-8 bg-white text-deep-purple px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  Close
-                </motion.button>
-              </motion.div>
+              <motion.button
+                onClick={() => setShowProposal(false)}
+                className="mt-8 bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all"
+                whileHover={{ scale: 1.1 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2 }}
+              >
+                💕 Yes, Forever! 💕
+              </motion.button>
             </motion.div>
           </motion.div>
         )}
@@ -213,7 +201,7 @@ export default function CTA() {
                   repeatType: "reverse"
                 }}
               >
-                📞 You Know The Number 💕
+                😎 You Know What To Do 💕
               </motion.p>
               
               <motion.button
