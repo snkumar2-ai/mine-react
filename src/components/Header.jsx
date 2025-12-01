@@ -25,8 +25,7 @@ export default function Header() {
             { name: 'Home', id: 'hero' },
             { name: 'Memories', id: 'memories' },
             { name: 'Poem', id: 'poem' },
-            { name: 'Letter', id: 'letter' },
-            { name: 'Contact', id: 'footer' }
+            { name: 'Letter', id: 'letter' }
           ].map((item) => (
             <motion.button
               key={item.id}
