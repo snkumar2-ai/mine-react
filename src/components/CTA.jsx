@@ -1,9 +1,14 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function CTA() {
   const [showMessage, setShowMessage] = useState(false)
   const [showWedding, setShowWedding] = useState(false)
+  const [windowHeight, setWindowHeight] = useState(800)
+
+  useEffect(() => {
+    setWindowHeight(window.innerHeight)
+  }, [])
 
   return (
     <section id="cta" className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -136,18 +141,18 @@ export default function CTA() {
                     key={i}
                     className="absolute text-4xl"
                     style={{
-                      left: `${Math.random() * 100}%`,
+                      left: `${(i * 3.33) % 100}%`,
                       top: `-10%`
                     }}
                     animate={{
-                      y: [0, window.innerHeight + 100],
+                      y: [0, windowHeight + 100],
                       rotate: [0, 360],
                       opacity: [0, 1, 0]
                     }}
                     transition={{
-                      duration: 3 + Math.random() * 2,
+                      duration: 3 + (i % 3),
                       repeat: Infinity,
-                      delay: Math.random() * 2
+                      delay: i * 0.1
                     }}
                   >
                     {i % 3 === 0 ? '❤️' : i % 3 === 1 ? '💕' : '💖'}
