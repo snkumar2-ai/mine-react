@@ -3,6 +3,31 @@ import { useState } from 'react'
 
 export default function SectionTextImage({ id, title, content, voiceOver, imageUrl, reverse }) {
   const [showVoiceOver, setShowVoiceOver] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const playVoiceOver = () => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel()
+      const utterance = new SpeechSynthesisUtterance(voiceOver)
+      utterance.rate = 0.9
+      utterance.pitch = 0.9
+      utterance.volume = 1
+      
+      const voices = window.speechSynthesis.getVoices()
+      const maleVoice = voices.find(voice => 
+        voice.name.includes('Male') || 
+        voice.name.includes('David') || 
+        voice.name.includes('Google US English')
+      )
+      if (maleVoice) utterance.voice = maleVoice
+      
+      utterance.onstart = () => setIsPlaying(true)
+      utterance.onend = () => setIsPlaying(false)
+      
+      window.speechSynthesis.speak(utterance)
+      setShowVoiceOver(true)
+    }
+  }
 
   return (
     <section id={id} className="min-h-screen flex items-center py-20 relative overflow-hidden">
@@ -36,11 +61,11 @@ export default function SectionTextImage({ id, title, content, voiceOver, imageU
           </div>
 
           <motion.button
-            onClick={() => setShowVoiceOver(!showVoiceOver)}
+            onClick={playVoiceOver}
             className="bg-gradient-to-r from-soft-teal to-warm-pastel text-white px-10 py-5 rounded-full font-lato text-lg font-semibold romantic-glow transition-all duration-300"
             whileHover={{ scale: 1.05 }}
           >
-            Play Voice-Over
+            {isPlaying ? '🔊 Playing...' : '🎙️ Play Voice-Over'}
           </motion.button>
 
           {showVoiceOver && (

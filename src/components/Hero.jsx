@@ -4,10 +4,39 @@ import { useState, useEffect } from 'react'
 export default function Hero() {
   const [showVoiceOver, setShowVoiceOver] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const playVoiceOver = () => {
+    const text = "Soumya... Before anything else... I hope you're smiling. Even if life has pulled us in different directions... I hope the light in you never dimmed. This... is something I should've said earlier... But maybe it's reaching you at the right time."
+    
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel()
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.rate = 0.9
+      utterance.pitch = 0.9
+      utterance.volume = 1
+      
+      // Try to get a male voice
+      const voices = window.speechSynthesis.getVoices()
+      const maleVoice = voices.find(voice => 
+        voice.name.includes('Male') || 
+        voice.name.includes('David') || 
+        voice.name.includes('James') ||
+        voice.name.includes('Google US English')
+      )
+      if (maleVoice) utterance.voice = maleVoice
+      
+      utterance.onstart = () => setIsPlaying(true)
+      utterance.onend = () => setIsPlaying(false)
+      
+      window.speechSynthesis.speak(utterance)
+      setShowVoiceOver(true)
+    }
+  }
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
@@ -57,14 +86,14 @@ export default function Hero() {
         </motion.p>
 
         <motion.button
-          onClick={() => setShowVoiceOver(!showVoiceOver)}
+          onClick={playVoiceOver}
           className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-12 py-6 rounded-full font-lato text-lg font-semibold romantic-glow transition-all duration-300 mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 2 }}
           whileHover={{ scale: 1.05 }}
         >
-          Read My Heart
+          {isPlaying ? '🔊 Playing...' : '🎙️ Read My Heart'}
         </motion.button>
 
         {showVoiceOver && (
