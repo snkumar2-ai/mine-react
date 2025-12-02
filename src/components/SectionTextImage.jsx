@@ -37,22 +37,21 @@ export default function SectionTextImage({ id, title, content, voiceOver, audioF
       
       const speak = () => {
         const utterance = new SpeechSynthesisUtterance(voiceOver)
-        utterance.rate = 0.7
-        utterance.pitch = 0.9
-        utterance.volume = 0.9
+        utterance.rate = 0.6
+        utterance.pitch = 0.7
+        utterance.volume = 0.8
         
         const voices = window.speechSynthesis.getVoices()
-        const romanticVoice = voices.find(voice => 
+        const emotionalMaleVoice = voices.find(voice => 
           voice.lang.includes('en') && (
-            voice.name.includes('Daniel') ||
-            voice.name.includes('Alex') ||
             voice.name.includes('Google UK English Male') ||
+            voice.name.includes('Daniel') ||
+            voice.name.includes('David') ||
             voice.name.toLowerCase().includes('male')
           )
-        ) || voices.find(voice => voice.lang.includes('en') && voice.name.includes('Google'))
-        || voices.find(voice => voice.lang.includes('en'))
+        ) || voices.find(voice => voice.lang.includes('en'))
         
-        if (romanticVoice) utterance.voice = romanticVoice
+        if (emotionalMaleVoice) utterance.voice = emotionalMaleVoice
         
         utterance.onstart = () => setIsPlaying(true)
         utterance.onend = () => setIsPlaying(false)
