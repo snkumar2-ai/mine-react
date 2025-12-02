@@ -1,30 +1,58 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-export default function SectionTextImage({ id, title, content, voiceOver, imageUrl, reverse }) {
+export default function SectionTextImage({ id, title, content, voiceOver, audioFile, imageUrl, reverse }) {
   const [showVoiceOver, setShowVoiceOver] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [audio, setAudio] = useState(null)
 
   const playVoiceOver = () => {
+    // Try to play custom audio file first
+    if (audioFile) {
+      try {
+        const audioElement = new Audio(audioFile)
+        audioElement.onloadstart = () => setIsPlaying(true)
+        audioElement.onended = () => setIsPlaying(false)
+        audioElement.onerror = () => {
+          setIsPlaying(false)
+          // Fallback to text-to-speech if audio file fails
+          playTextToSpeech()
+        }
+        audioElement.play()
+        setShowVoiceOver(true)
+        setAudio(audioElement)
+        return
+      } catch (error) {
+        console.log('Audio file failed, using text-to-speech')
+      }
+    }
+    
+    // Fallback to text-to-speech
+    playTextToSpeech()
+  }
+
+  const playTextToSpeech = () => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel()
       
       const speak = () => {
         const utterance = new SpeechSynthesisUtterance(voiceOver)
-        utterance.rate = 0.8
-        utterance.pitch = 0.8
-        utterance.volume = 1
+        utterance.rate = 0.7
+        utterance.pitch = 0.9
+        utterance.volume = 0.9
         
         const voices = window.speechSynthesis.getVoices()
-        const maleVoice = voices.find(voice => 
+        const romanticVoice = voices.find(voice => 
           voice.lang.includes('en') && (
-            voice.name.toLowerCase().includes('male') || 
-            voice.name.includes('David') || 
-            voice.name.includes('Google UK English Male')
+            voice.name.includes('Daniel') ||
+            voice.name.includes('Alex') ||
+            voice.name.includes('Google UK English Male') ||
+            voice.name.toLowerCase().includes('male')
           )
-        ) || voices.find(voice => voice.lang.includes('en'))
+        ) || voices.find(voice => voice.lang.includes('en') && voice.name.includes('Google'))
+        || voices.find(voice => voice.lang.includes('en'))
         
-        if (maleVoice) utterance.voice = maleVoice
+        if (romanticVoice) utterance.voice = romanticVoice
         
         utterance.onstart = () => setIsPlaying(true)
         utterance.onend = () => setIsPlaying(false)
@@ -78,7 +106,7 @@ export default function SectionTextImage({ id, title, content, voiceOver, imageU
             className="bg-gradient-to-r from-soft-teal to-warm-pastel text-white px-10 py-5 rounded-full font-lato text-lg font-semibold romantic-glow transition-all duration-300"
             whileHover={{ scale: 1.05 }}
           >
-            {isPlaying ? '🔊 Playing...' : '🎙️ Play Voice-Over'}
+            {isPlaying ? '🔊 Playing...' : (audioFile ? '🎤 Play My Voice' : '🎙️ Play Voice-Over')}
           </motion.button>
 
           {showVoiceOver && (
