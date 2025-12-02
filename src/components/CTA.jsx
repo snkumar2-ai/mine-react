@@ -1,79 +1,133 @@
-import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
 
-function CTA() {
+export default function CTA() {
   const [showProposal, setShowProposal] = useState(false)
 
   return (
-    <section id="cta" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(45deg, #FFB6C1, #E6E6FA)' }}>
-      <div style={{ textAlign: 'center', padding: '20px' }}>
-        <h2 style={{ fontSize: '3rem', color: '#4B0082', marginBottom: '20px' }}>
-          💕 UPDATED VERSION 2024 💕
-        </h2>
-        
-        <p style={{ fontSize: '1.5rem', color: '#2F4F4F', marginBottom: '30px', fontStyle: 'italic' }}>
-          "Soumya... If any part of this reaches you... even if it's just a small spark... I'd love to talk again."
-        </p>
-
-        <button
-          onClick={() => setShowProposal(true)}
-          style={{ 
-            background: '#FF69B4', 
-            color: 'white', 
-            padding: '15px 30px', 
-            fontSize: '1.2rem',
-            border: 'none',
-            borderRadius: '25px',
-            cursor: 'pointer'
+    <section id="cta" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-soft-pink/40 via-warm-pastel/30 to-soft-teal/40"></div>
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1920')] bg-cover bg-center opacity-20"></div>
+      
+      {/* Floating Hearts */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute text-4xl pointer-events-none"
+          style={{
+            left: `${(i * 10) % 100}%`,
+            top: `${(i * 15) % 100}%`,
+          }}
+          animate={{
+            y: [0, -40, 0],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{
+            duration: 4 + (i % 2),
+            repeat: Infinity,
+            delay: i * 0.3,
           }}
         >
-          💍 A New Beginning? 💍
-        </button>
+          ❤️
+        </motion.div>
+      ))}
 
+      <div className="text-center z-30 px-8 max-w-4xl relative">
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 2 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="font-playfair text-5xl md:text-7xl text-deep-purple mb-8 text-glow">
+            The Gentle Ask
+          </h2>
+          
+          <p className="font-lato text-2xl text-deep-blue leading-relaxed mb-12 italic">
+            "Soumya... If any part of this reaches you... even if it's just a small spark... I'd love to talk again."
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="flex justify-center items-center relative z-40"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <motion.button
+            onClick={() => setShowProposal(true)}
+            className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-12 py-6 rounded-full font-lato text-xl font-semibold romantic-glow transition-all duration-300 min-w-[280px] cursor-pointer relative z-50"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            A New Beginning?
+          </motion.button>
+        </motion.div>
+        
         {showProposal && (
-          <div style={{ 
-            position: 'fixed', 
-            top: 0, 
-            left: 0, 
-            right: 0, 
-            bottom: 0, 
-            background: 'rgba(0,0,0,0.8)', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center' 
-          }}>
-            <div style={{ 
-              background: 'white', 
-              padding: '30px', 
-              borderRadius: '15px', 
-              textAlign: 'center',
-              maxWidth: '400px'
-            }}>
-              <div style={{ fontSize: '4rem', marginBottom: '20px' }}>💍</div>
-              <h2 style={{ fontSize: '2rem', marginBottom: '15px' }}>Soumya, Will You Marry Me?</h2>
-              <p style={{ marginBottom: '20px' }}>💕 You are my everything, my forever, my always 💕</p>
-              <button
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <motion.div 
+              className="bg-white p-8 rounded-3xl text-center max-w-md shadow-2xl"
+              initial={{ scale: 0.5, rotate: -10 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
+            >
+              <motion.div 
+                className="text-8xl mb-6"
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                💍
+              </motion.div>
+              
+              <motion.h2
+                className="font-playfair text-3xl text-deep-purple mb-4 font-bold"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                Soumya, Will You Marry Me?
+              </motion.h2>
+              
+              <motion.p
+                className="text-lg text-gray-600 mb-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                💕 You are my everything, my forever, my always 💕
+              </motion.p>
+
+              <motion.button
                 onClick={() => setShowProposal(false)}
-                style={{ 
-                  background: '#FF1493', 
-                  color: 'white', 
-                  padding: '10px 20px', 
-                  border: 'none',
-                  borderRadius: '10px',
-                  cursor: 'pointer'
-                }}
+                className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all"
+                whileHover={{ scale: 1.1 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
               >
                 💕 Yes, Forever! 💕
-              </button>
-            </div>
-          </div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
         )}
 
-        <p style={{ marginTop: '30px', color: '#696969', fontStyle: 'italic' }}>
+        <motion.p
+          className="mt-12 text-deep-blue/60 font-lato text-sm italic"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.6 }}
+          transition={{ duration: 2, delay: 1 }}
+        >
           No pressure. No expectations. Just honesty and hope.
-        </p>
+        </motion.p>
       </div>
     </section>
   )
 }
-
-export default CTA
