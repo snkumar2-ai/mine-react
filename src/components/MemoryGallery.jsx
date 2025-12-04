@@ -3,6 +3,7 @@ import { useState, useRef } from 'react'
 
 export default function MemoryGallery() {
   const [hoveredImage, setHoveredImage] = useState(null)
+  const [showModal, setShowModal] = useState(false)
   const scrollRef = useRef(null)
 
   const scroll = (direction) => {
@@ -108,10 +109,43 @@ export default function MemoryGallery() {
           transition={{ duration: 2, delay: 1 }}
           viewport={{ once: true }}
         >
-          <button className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-10 py-5 rounded-full font-lato text-lg font-semibold romantic-glow transition-all duration-300 hover:scale-105">
+          <button 
+            onClick={() => setShowModal(true)}
+            className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-10 py-5 rounded-full font-lato text-lg font-semibold romantic-glow transition-all duration-300 hover:scale-105"
+          >
             Walk Through Our Memories
           </button>
         </motion.div>
+
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            onClick={() => setShowModal(false)}
+          >
+            <motion.div 
+              className="relative max-w-4xl max-h-[90vh] p-4"
+              initial={{ scale: 0.5 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setShowModal(false)}
+                className="absolute top-2 right-2 z-10 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-all"
+              >
+                ✕
+              </button>
+              <img 
+                src="/images/Screenshot%202025-12-04%20134115.png"
+                alt="Our Memories"
+                className="w-full h-full object-contain rounded-2xl shadow-2xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
       </div>
     </section>
   )
