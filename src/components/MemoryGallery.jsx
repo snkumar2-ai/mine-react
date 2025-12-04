@@ -1,8 +1,18 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 export default function MemoryGallery() {
   const [hoveredImage, setHoveredImage] = useState(null)
+  const scrollRef = useRef(null)
+
+  const scroll = (direction) => {
+    const container = scrollRef.current
+    const scrollAmount = 200
+    container.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth'
+    })
+  }
 
   const memories = [
     { caption: "This smile made everything worth it.", location: "Bali ATV trails", color: "from-soft-pink/40 to-warm-pastel/40" },
@@ -31,40 +41,58 @@ export default function MemoryGallery() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-16">
-          {memories.map((memory, index) => (
-            <motion.div
-              key={index}
-              className="relative group cursor-pointer"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              onHoverStart={() => setHoveredImage(index)}
-              onHoverEnd={() => setHoveredImage(null)}
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className={`aspect-square bg-gradient-to-br ${memory.color} rounded-2xl backdrop-blur-sm border border-soft-pink/20 flex items-center justify-center relative overflow-hidden shadow-lg`}>
-                <div className="text-center p-3">
-                  <p className="text-deep-purple font-lato text-xs mb-2 font-semibold">{memory.location}</p>
-                  <div className="w-12 h-12 bg-white/20 rounded-full mx-auto"></div>
+        <div className="relative mb-16">
+          <button 
+            onClick={() => scroll('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-soft-pink/80 hover:bg-soft-pink text-white p-2 rounded-full shadow-lg transition-all"
+          >
+            ←
+          </button>
+          <button 
+            onClick={() => scroll('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-soft-pink/80 hover:bg-soft-pink text-white p-2 rounded-full shadow-lg transition-all"
+          >
+            →
+          </button>
+          <div 
+            ref={scrollRef}
+            className="flex gap-4 overflow-x-auto scrollbar-hide px-8"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {memories.map((memory, index) => (
+              <motion.div
+                key={index}
+                className="relative group cursor-pointer flex-shrink-0 w-32 h-32"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                onHoverStart={() => setHoveredImage(index)}
+                onHoverEnd={() => setHoveredImage(null)}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className={`w-full h-full bg-gradient-to-br ${memory.color} rounded-2xl backdrop-blur-sm border border-soft-pink/20 flex items-center justify-center relative overflow-hidden shadow-lg`}>
+                  <div className="text-center p-3">
+                    <p className="text-deep-purple font-lato text-xs mb-2 font-semibold">{memory.location}</p>
+                    <div className="w-12 h-12 bg-white/20 rounded-full mx-auto"></div>
+                  </div>
+                  
+                  {hoveredImage === index && (
+                    <motion.div
+                      className="absolute inset-0 bg-deep-purple/90 rounded-2xl flex items-center justify-center p-3"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <p className="text-white font-lato text-center text-sm italic leading-relaxed">
+                        {memory.caption}
+                      </p>
+                    </motion.div>
+                  )}
                 </div>
-                
-                {hoveredImage === index && (
-                  <motion.div
-                    className="absolute inset-0 bg-deep-purple/90 rounded-2xl flex items-center justify-center p-3"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <p className="text-white font-lato text-center text-sm italic leading-relaxed">
-                      {memory.caption}
-                    </p>
-                  </motion.div>
-                )}
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         <motion.div
