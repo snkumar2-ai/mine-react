@@ -20,7 +20,14 @@ export default function MemoryGallery() {
     { caption: "Where happiness looked like you.", location: "Ferry winds", color: "from-warm-pastel/40 to-soft-teal/40" },
     { caption: "This day still feels alive inside me.", location: "Mysore lights", color: "from-deep-purple/40 to-soft-pink/40" },
     { caption: "If time had a favorite memory — this was it.", location: "Bandipur calm", color: "from-soft-pink/40 to-deep-purple/40" },
-    { caption: "I didn't know peace until this moment.", location: "Singapore magic", color: "from-soft-teal/40 to-warm-pastel/40" }
+    { caption: "I didn't know peace until this moment.", location: "Singapore magic", color: "from-soft-teal/40 to-warm-pastel/40" },
+    { caption: "Finding divinity in your presence.", location: "Temple Visits", color: "from-deep-purple/40 to-warm-pastel/40" },
+    { caption: "Every journey felt like coming home.", location: "Cab Rides", color: "from-warm-pastel/40 to-deep-purple/40" },
+    { caption: "Miles meant nothing with you beside me.", location: "Long Rides", color: "from-soft-teal/40 to-deep-purple/40" },
+    { caption: "How we always had our best Moments.", location: "Full Circle", color: "from-soft-pink/40 to-soft-teal/40" },
+    { caption: "Winning was just being with you.", location: "Card Games", color: "from-deep-purple/40 to-soft-teal/40" },
+    { caption: "Every bite tasted better with your laughter.", location: "Food Hunting", color: "from-warm-pastel/40 to-soft-pink/40" },
+    { caption: "Playing together, dreaming together.", location: "Gaming", color: "from-soft-teal/40 to-warm-pastel/40" }
   ]
 
   return (
