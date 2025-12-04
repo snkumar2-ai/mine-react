@@ -57,7 +57,6 @@ export default function MemoryGallery() {
           <div 
             ref={scrollRef}
             className="flex gap-4 overflow-x-auto scrollbar-hide px-8"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {memories.map((memory, index) => (
               <motion.div

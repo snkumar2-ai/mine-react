@@ -53,3 +53,13 @@ body {
 .animate-heartbeat {
   animation: heartbeat 1.5s ease-in-out infinite;
 }
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
