@@ -138,11 +138,61 @@ export default function MemoryGallery() {
               >
                 ✕
               </button>
-              <img 
-                src="/images/Screenshot%202025-12-04%20134115.png"
-                alt="Our Memories"
-                className="w-full h-full object-contain rounded-2xl shadow-2xl"
-              />
+              <div className="bg-gradient-to-br from-soft-pink/20 to-warm-pastel/20 rounded-2xl p-16 text-center backdrop-blur-sm">
+                <div className="relative flex justify-center items-center mb-8">
+                  <motion.div
+                    className="text-8xl absolute"
+                    animate={{
+                      x: [-20, -10, -20],
+                      rotate: [0, 5, 0]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    😊
+                  </motion.div>
+                  <motion.div
+                    className="text-8xl absolute"
+                    animate={{
+                      x: [20, 10, 20],
+                      rotate: [0, -5, 0]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.5
+                    }}
+                  >
+                    😍
+                  </motion.div>
+                  <motion.div
+                    className="text-6xl absolute z-10"
+                    animate={{
+                      scale: [0.8, 1.2, 0.8],
+                      opacity: [0.5, 1, 0.5]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    ❤️
+                  </motion.div>
+                </div>
+                <motion.p
+                  className="text-white text-2xl font-playfair italic"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  "Two hearts, one beautiful memory"
+                </motion.p>
+              </div>
             </motion.div>
           </motion.div>
         )}
