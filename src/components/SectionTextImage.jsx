@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-export default function SectionTextImage({ id, title, content, voiceOver, audioFile, imageUrl, reverse }) {
+export default function SectionTextImage({ id, title, content, voiceOver, audioFile, imageUrl, videoUrl, reverse }) {
   const [showVoiceOver, setShowVoiceOver] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [audio, setAudio] = useState(null)
@@ -127,11 +127,24 @@ export default function SectionTextImage({ id, title, content, voiceOver, audioF
           viewport={{ once: true }}
         >
           <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
-            <img 
-              src={imageUrl} 
-              alt={title} 
-              className="w-full h-full object-cover"
-            />
+            {videoUrl ? (
+              <video 
+                src={videoUrl}
+                className="w-full h-full object-cover"
+                controls
+                muted
+                loop
+                playsInline
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img 
+                src={imageUrl} 
+                alt={title} 
+                className="w-full h-full object-cover"
+              />
+            )}
           </div>
         </motion.div>
       </div>

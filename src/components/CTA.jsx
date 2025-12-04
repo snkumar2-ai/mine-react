@@ -74,7 +74,7 @@ export default function CTA() {
             transition={{ duration: 0.5 }}
           >
             <motion.div 
-              className="bg-white p-8 rounded-3xl text-center max-w-md shadow-2xl"
+              className="bg-white p-8 rounded-3xl text-center max-w-2xl shadow-2xl"
               initial={{ scale: 0.5, rotate: -10 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
@@ -107,7 +107,7 @@ export default function CTA() {
 
               <motion.button
                 onClick={() => setShowProposal(false)}
-                className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all"
+                className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all mb-6"
                 whileHover={{ scale: 1.1 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -115,6 +115,25 @@ export default function CTA() {
               >
                 💕 Yes, Forever! 💕
               </motion.button>
+
+              <motion.div
+                className="w-full aspect-video rounded-2xl overflow-hidden shadow-lg"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.2 }}
+              >
+                <video 
+                  src="/videos/GettingBack.mp4"
+                  className="w-full h-full object-cover"
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
