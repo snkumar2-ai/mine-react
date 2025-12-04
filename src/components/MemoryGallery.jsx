@@ -31,7 +31,7 @@ export default function MemoryGallery() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-16">
           {memories.map((memory, index) => (
             <motion.div
               key={index}
@@ -44,20 +44,20 @@ export default function MemoryGallery() {
               onHoverEnd={() => setHoveredImage(null)}
               whileHover={{ scale: 1.05 }}
             >
-              <div className={`aspect-square bg-gradient-to-br ${memory.color} rounded-3xl backdrop-blur-sm border border-soft-pink/20 flex items-center justify-center relative overflow-hidden shadow-xl`}>
-                <div className="text-center p-6">
-                  <p className="text-deep-purple font-lato text-sm mb-4 font-semibold">{memory.location}</p>
-                  <div className="w-24 h-24 bg-white/20 rounded-full mx-auto"></div>
+              <div className={`aspect-square bg-gradient-to-br ${memory.color} rounded-2xl backdrop-blur-sm border border-soft-pink/20 flex items-center justify-center relative overflow-hidden shadow-lg`}>
+                <div className="text-center p-3">
+                  <p className="text-deep-purple font-lato text-xs mb-2 font-semibold">{memory.location}</p>
+                  <div className="w-12 h-12 bg-white/20 rounded-full mx-auto"></div>
                 </div>
                 
                 {hoveredImage === index && (
                   <motion.div
-                    className="absolute inset-0 bg-deep-purple/90 rounded-3xl flex items-center justify-center p-6"
+                    className="absolute inset-0 bg-deep-purple/90 rounded-2xl flex items-center justify-center p-3"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <p className="text-white font-lato text-center text-lg italic leading-relaxed">
+                    <p className="text-white font-lato text-center text-sm italic leading-relaxed">
                       {memory.caption}
                     </p>
                   </motion.div>

@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function CTA() {
   const [showProposal, setShowProposal] = useState(false)
+  const [showDance, setShowDance] = useState(false)
 
   return (
     <section id="cta" className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -74,11 +75,14 @@ export default function CTA() {
             transition={{ duration: 0.5 }}
           >
             <motion.div 
-              className="bg-white p-8 rounded-3xl text-center max-w-2xl shadow-2xl"
+              className="relative p-8 rounded-3xl text-center max-w-2xl shadow-2xl overflow-hidden"
               initial={{ scale: 0.5, rotate: -10 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
             >
+              <div className="absolute inset-0 bg-[url('/images/Screenshot%202025-12-04%20134115.png')] bg-cover bg-center"></div>
+              <div className="absolute inset-0 bg-white/85 backdrop-blur-sm"></div>
+              <div className="relative z-10">
               <motion.div 
                 className="text-8xl mb-6"
                 animate={{ rotate: [0, 10, -10, 0] }}
@@ -106,7 +110,7 @@ export default function CTA() {
               </motion.p>
 
               <motion.button
-                onClick={() => setShowProposal(false)}
+                onClick={() => setShowDance(true)}
                 className="bg-gradient-to-r from-soft-pink to-warm-pastel text-white px-8 py-4 rounded-full font-lato text-lg font-semibold hover:scale-105 transition-all mb-6"
                 whileHover={{ scale: 1.1 }}
                 initial={{ opacity: 0 }}
@@ -116,24 +120,59 @@ export default function CTA() {
                 💕 Yes, Forever! 💕
               </motion.button>
 
-              <motion.div
-                className="w-full aspect-video rounded-2xl overflow-hidden shadow-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.2 }}
-              >
-                <video 
-                  src="/videos/GettingBack.mp4"
-                  className="w-full h-full object-cover"
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
+              {showDance && (
+                <motion.div
+                  className="flex justify-center items-center space-x-4 py-8"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  Your browser does not support the video tag.
-                </video>
-              </motion.div>
+                  <motion.div
+                    className="text-6xl"
+                    animate={{
+                      rotate: [0, -15, 15, -15, 0],
+                      y: [0, -20, 0, -10, 0]
+                    }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    💃
+                  </motion.div>
+                  <motion.div
+                    className="text-6xl"
+                    animate={{
+                      rotate: [0, 15, -15, 15, 0],
+                      y: [0, -15, 0, -25, 0]
+                    }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.2
+                    }}
+                  >
+                    🕺
+                  </motion.div>
+                  <motion.div
+                    className="text-4xl"
+                    animate={{
+                      scale: [1, 1.5, 1, 1.2, 1],
+                      rotate: [0, 360]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    🎉
+                  </motion.div>
+                </motion.div>
+              )}
+              </div>
             </motion.div>
           </motion.div>
         )}
