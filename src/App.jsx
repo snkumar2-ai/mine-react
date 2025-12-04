@@ -23,7 +23,7 @@ function App() {
         ]}
         voiceOver="You came into my life quietly... not like a storm, but like a sunrise. Soft... warm... gentle. I didn't even realize it at first... but you changed the way my world felt. You made ordinary moments glow. You made silence feel safe. And somewhere between your laughter and your calmness... I found home."
         imageUrl="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800"
-        videoUrl="/videos/GettingBack.mp4"
+        videoUrl="/images/image"
         reverse={false}
       />
       <SectionTextImage 
