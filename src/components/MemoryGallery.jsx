@@ -56,12 +56,12 @@ export default function MemoryGallery() {
           </button>
           <div 
             ref={scrollRef}
-            className="flex gap-4 overflow-x-auto scrollbar-hide px-8"
+            className="flex gap-3 overflow-x-auto scrollbar-hide px-4"
           >
             {memories.map((memory, index) => (
               <motion.div
                 key={index}
-                className="relative group cursor-pointer flex-shrink-0 w-32 h-32"
+                className="relative group cursor-pointer flex-shrink-0 w-24 h-24"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
@@ -71,19 +71,19 @@ export default function MemoryGallery() {
                 whileHover={{ scale: 1.05 }}
               >
                 <div className={`w-full h-full bg-gradient-to-br ${memory.color} rounded-2xl backdrop-blur-sm border border-soft-pink/20 flex items-center justify-center relative overflow-hidden shadow-lg`}>
-                  <div className="text-center p-3">
-                    <p className="text-deep-purple font-lato text-xs mb-2 font-semibold">{memory.location}</p>
-                    <div className="w-12 h-12 bg-white/20 rounded-full mx-auto"></div>
+                  <div className="text-center p-2">
+                    <p className="text-deep-purple font-lato text-[10px] mb-1 font-semibold">{memory.location}</p>
+                    <div className="w-8 h-8 bg-white/20 rounded-full mx-auto"></div>
                   </div>
                   
                   {hoveredImage === index && (
                     <motion.div
-                      className="absolute inset-0 bg-deep-purple/90 rounded-2xl flex items-center justify-center p-3"
+                      className="absolute inset-0 bg-deep-purple/90 rounded-2xl flex items-center justify-center p-2"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <p className="text-white font-lato text-center text-sm italic leading-relaxed">
+                      <p className="text-white font-lato text-center text-xs italic leading-tight">
                         {memory.caption}
                       </p>
                     </motion.div>
